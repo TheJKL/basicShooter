@@ -45,6 +45,11 @@ public class WeaponController : MonoBehaviour
         {
             setEquip(secondary, secondaryWeapon);
         }
+
+        if (Input.GetKeyDown(KeyCode.R) && !currentWeapon.reloading && currentWeapon.currentAmmo < currentWeapon.magSize)
+        {
+            StartCoroutine(currentWeapon.reload());
+        }
     }
 
     private void setEquip(GameObject weaponGO, Weapon weapon)

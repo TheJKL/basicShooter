@@ -5130,6 +5130,7 @@ GameObject:
   m_Component:
   - component: {fileID: 353508833}
   - component: {fileID: 353508834}
+  - component: {fileID: 353508835}
   m_Layer: 0
   m_Name: WeaponController
   m_TagString: Untagged
@@ -5167,6 +5168,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   primary: {fileID: 2507458162861677203}
   secondary: {fileID: 8296172668012567629}
+--- !u!95 &353508835
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 353508832}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: f918ac2499924f1418cdcf42ec0b6c9b, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &567514102
 GameObject:
   m_ObjectHideFlags: 0
@@ -6630,11 +6650,15 @@ MonoBehaviour:
   range: 100
   hitForce: 25
   fireRate: 10
+  magSize: 30
+  reloadTime: 2
   fireModeSwitch: 0
   fullAuto: 1
   fpsCam: {fileID: 963194227}
   muzzleFlash: {fileID: 7963215419799832046}
   impact: {fileID: 2139073344451447403, guid: 65e50237f746e5547b3ebaac503e4c6c, type: 3}
+  animator: {fileID: 353508835}
+  reloading: 0
 --- !u!33 &3556865662933953055
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -11653,11 +11677,15 @@ MonoBehaviour:
   range: 100
   hitForce: 15
   fireRate: 5
+  magSize: 15
+  reloadTime: 5
   fireModeSwitch: 1
   fullAuto: 0
   fpsCam: {fileID: 963194227}
   muzzleFlash: {fileID: 251982534}
   impact: {fileID: 2139073344451447403, guid: 65e50237f746e5547b3ebaac503e4c6c, type: 3}
+  animator: {fileID: 353508835}
+  reloading: 0
 --- !u!1 &8817160894593081914
 GameObject:
   m_ObjectHideFlags: 0
