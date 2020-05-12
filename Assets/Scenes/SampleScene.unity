@@ -5164,8 +5164,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d58f04a25f07534fb9411cb5caa8d3b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  primaryWeapon: {fileID: 8296172668012567630}
-  secondaryWeapon: {fileID: 0}
+  primary: {fileID: 8296172668012567629}
+  secondary: {fileID: 8296172668012567629}
 --- !u!1 &567514102
 GameObject:
   m_ObjectHideFlags: 0
@@ -6738,10 +6738,11 @@ MonoBehaviour:
   range: 100
   hitForce: 15
   fireRate: 5
+  fireModeSwitch: 1
+  fullAuto: 0
   fpsCam: {fileID: 963194227}
   muzzleFlash: {fileID: 251982534}
   impact: {fileID: 2139073344451447403, guid: 65e50237f746e5547b3ebaac503e4c6c, type: 3}
-  fullAuto: 0
 --- !u!1 &8817160894593081914
 GameObject:
   m_ObjectHideFlags: 0

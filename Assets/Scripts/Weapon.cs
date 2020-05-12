@@ -8,18 +8,15 @@ public class Weapon : MonoBehaviour
     public float range = 100f;
     public float hitForce = 50f;
     public float fireRate = 2f;
+    public bool fireModeSwitch;
+    public bool fullAuto; // Defines what state the gun starts in (full or semi auto)
 
     public Camera fpsCam;
     public ParticleSystem muzzleFlash;
     public GameObject impact;
 
     private float nextFireTime = 0;
-    public bool fullAuto = false;
 
-    void Update()
-    {
-        
-    }
 
     public void Shoot()
     {
@@ -28,7 +25,6 @@ public class Weapon : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out hit, range))
         {
-            //Debug.Log(hit.transform.name);
             Target target = hit.transform.GetComponent<Target>();
 
             if(target != null)
@@ -48,10 +44,13 @@ public class Weapon : MonoBehaviour
 
     public void switchFireMode()
     {
-        fullAuto = !fullAuto;
+        if (fireModeSwitch)
+        {
+            fullAuto = !fullAuto;
+        }
     }
 
-    public bool canFire()
+    public bool canFire()//TODO include reloading in the checks 
     {
         return Time.time >= nextFireTime;
     }
