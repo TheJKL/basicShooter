@@ -22,7 +22,7 @@ public class PlayerMove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask) || Physics.CheckSphere(groundCheck.position, groundDistance, jumpable);
+        isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask) || Physics.CheckSphere(groundCheck.position, groundDistance, jumpable);// checking if the surface is either the ground or a jumpable surface
         
         if(isGrounded && velocity.y < 0)
         {
@@ -40,7 +40,7 @@ public class PlayerMove : MonoBehaviour
 
         if(isGrounded && Input.GetButtonDown("Jump"))
         {
-            velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
+            velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);// root(h * -2g) = v
         }
     }
 }

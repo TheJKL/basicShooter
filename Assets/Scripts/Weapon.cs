@@ -32,28 +32,28 @@ public class Weapon : MonoBehaviour
 
     void OnEnable()
     {
-        reloading = false;
+        reloading = false;//these lines prevent the gun from locking up if switched before reloading
         animator.SetBool("Reloading", false);
     }
 
     void Update()
     {
-        if(currentAmmo == 0 && !reloading)
+        if(currentAmmo == 0 && !reloading)//auto reloading
         {
             StartCoroutine(reload());
         }
     }
 
     public IEnumerator reload()
-    {
+    { //reload coroutine so it can be paused
         reloading = true;
         animator.SetBool("Reloading", true);
-        yield return new WaitForSeconds(reloadTime - 0.25f);
+        yield return new WaitForSeconds(reloadTime - 0.25f);// wait for reload minus an offset time for the animation to complete
         animator.SetBool("Reloading", false);
-        yield return new WaitForSeconds(0.25f);
+        yield return new WaitForSeconds(0.25f);//wait for animationt to complete
 
 
-        currentAmmo = magSize;
+        currentAmmo = magSize;//reset ammo count
         reloading = false;
     }
 
@@ -62,36 +62,36 @@ public class Weapon : MonoBehaviour
         muzzleFlash.Play();
         currentAmmo -= 1;
 
-        nextFireTime = Time.time + 1f / fireRate;
+        nextFireTime = Time.time + 1f / fireRate;//fire rate control
         RaycastHit hit;
         if (Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out hit, range))
         {
             Target target = hit.transform.GetComponent<Target>();
 
-            if(target != null)
+            if(target != null)//chechk that whatever the raycast hit was a target
             {
-                target.Damage(damage);
+                target.Damage(damage);//damages the target
             }
 
-            if(hit.rigidbody != null)
+            if(hit.rigidbody != null)//if object has rigid body 
             {
-                hit.rigidbody.AddForce(-hit.normal * hitForce);
+                hit.rigidbody.AddForce(-hit.normal * hitForce);//add hitforce
             }
             
-            GameObject impactGO = Instantiate(impact, hit.point, Quaternion.LookRotation(hit.normal));
+            GameObject impactGO = Instantiate(impact, hit.point, Quaternion.LookRotation(hit.normal));//create hit particles
             Destroy(impactGO, 1f);
         }
     }
 
     public void switchFireMode()
     {
-        if (fireModeSwitch)
+        if (fireModeSwitch)//if weapon has ability to switch fire modes
         {
             fullAuto = !fullAuto;
         }
     }
 
-    public bool canFire()//TODO include reloading in the checks 
+    public bool canFire()//checks if the weapon can fire
     {
         return Time.time >= nextFireTime && currentAmmo > 0 && !reloading;
     }

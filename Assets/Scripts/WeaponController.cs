@@ -54,10 +54,10 @@ public class WeaponController : MonoBehaviour
 
     private void setEquip(GameObject weaponGO, Weapon weapon)
     {
-        currentWeaponGO.SetActive(false);
-        weaponGO.SetActive(true);
+        currentWeaponGO.SetActive(false);//deactivate old weapon GO
+        weaponGO.SetActive(true);//activate new weapon GO
 
-        currentWeapon = weapon;
+        currentWeapon = weapon;//set weapon and weaponGO variables
         currentWeaponGO = weaponGO;
     }
 }
