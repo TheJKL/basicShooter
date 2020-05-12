@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class basicGun : MonoBehaviour
+public class Weapon : MonoBehaviour
 {
     public float damage = 5f;
     public float range = 100f;
@@ -14,26 +14,17 @@ public class basicGun : MonoBehaviour
     public GameObject impact;
 
     private float nextFireTime = 0;
-    private bool fullAuto = false;
+    public bool fullAuto = false;
 
     void Update()
     {
-        if ((!fullAuto && Input.GetButtonDown("Fire1") || fullAuto && Input.GetButton("Fire1")) && Time.time >= nextFireTime)
-        {
-            nextFireTime = Time.time + 1f / fireRate;
-            Shoot();
-        }
-
-        if (Input.GetKeyDown(KeyCode.V))
-        {
-            fullAuto = !fullAuto;
-        }
+        
     }
 
-    void Shoot()
+    public void Shoot()
     {
         muzzleFlash.Play();
-
+        nextFireTime = Time.time + 1f / fireRate;
         RaycastHit hit;
         if (Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out hit, range))
         {
@@ -53,7 +44,15 @@ public class basicGun : MonoBehaviour
             GameObject impactGO = Instantiate(impact, hit.point, Quaternion.LookRotation(hit.normal));
             Destroy(impactGO, 1f);
         }
+    }
 
+    public void switchFireMode()
+    {
+        fullAuto = !fullAuto;
+    }
 
+    public bool canFire()
+    {
+        return Time.time >= nextFireTime;
     }
 }

@@ -1,22 +1,52 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class WeaponController : MonoBehaviour
 {
 
-    public GameObject primaryWeapon;
-    public GameObject secondaryWeapon;
+    public GameObject primary;
+    public GameObject secondary;
 
-    // Start is called before the first frame update
+    private Weapon primaryWeapon;
+    private Weapon secondaryWeapon;
+
+    private Weapon currentWeapon;
+
     void Start()
     {
-
+        primaryWeapon = primary.GetComponent<Weapon>();
+        secondaryWeapon = secondary.GetComponent<Weapon>();
+        
+        currentWeapon = primaryWeapon;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if ((!currentWeapon.fullAuto && Input.GetButtonDown("Fire1") || currentWeapon.fullAuto && Input.GetButton("Fire1")) && currentWeapon.canFire())
+        {
+            currentWeapon.Shoot();
+        }
+
+        if (Input.GetKeyDown(KeyCode.V))
+        {
+            currentWeapon.switchFireMode();
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha1) && currentWeapon != primaryWeapon)
+        {
+            setEquip(primary, primaryWeapon);
+        } 
+        else if (Input.GetKeyDown(KeyCode.Alpha2) && currentWeapon != secondaryWeapon)
+        {
+            setEquip(secondary, secondaryWeapon);
+        }
+    }
+
+    private void setEquip(GameObject primary, Weapon primaryWeapon)
+    {
+        throw new NotImplementedException();
     }
 }
