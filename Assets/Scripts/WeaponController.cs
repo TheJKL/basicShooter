@@ -12,13 +12,15 @@ public class WeaponController : MonoBehaviour
     private Weapon primaryWeapon;
     private Weapon secondaryWeapon;
 
+    private GameObject currentWeaponGO;
     private Weapon currentWeapon;
 
     void Start()
     {
         primaryWeapon = primary.GetComponent<Weapon>();
         secondaryWeapon = secondary.GetComponent<Weapon>();
-        
+
+        currentWeaponGO = primary;
         currentWeapon = primaryWeapon;
     }
 
@@ -45,8 +47,12 @@ public class WeaponController : MonoBehaviour
         }
     }
 
-    private void setEquip(GameObject primary, Weapon primaryWeapon)
+    private void setEquip(GameObject weaponGO, Weapon weapon)
     {
-        throw new NotImplementedException();
+        currentWeaponGO.SetActive(false);
+        weaponGO.SetActive(true);
+
+        currentWeapon = weapon;
+        currentWeaponGO = weaponGO;
     }
 }
